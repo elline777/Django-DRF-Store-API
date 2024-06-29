@@ -27,9 +27,9 @@ class UserSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         user = ApiUser.objects.create(
-            email = validated_data['email'],
-            username = validated_data['username'],
-            role = validated_data['role'],
+            email=validated_data['email'],
+            username=validated_data['username'],
+            role=validated_data['role'],
         )
         user.set_password(validated_data['password'])
         user.save(update_fields=['password'])
