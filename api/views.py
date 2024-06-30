@@ -7,7 +7,7 @@ from api.permissions import IsSeller, IsCustomer
 
 from api.models import ApiUser, Store, Product, Order
 from api.serializers import UserSerializer, StoreSerializer, ProductSerializer, \
-    OrderSerializer
+    OrderSerializer, OrderWriteSerializer
 
 
 # Create your views here.
@@ -43,4 +43,9 @@ class ProductModelViewSet(viewsets.ModelViewSet):
 class OrderModelViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, IsCustomer]
     queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+
+    def get_serializer_class(self):
+        if self.action in ["create", "update", "partial_update", "destroy"]:
+            return OrderWriteSerializer
+
+        return OrderSerializer

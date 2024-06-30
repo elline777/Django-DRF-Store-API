@@ -55,3 +55,23 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = '__all__'
         extra_kwargs = {'id': {'read_only': True}}
+
+
+class OrderWriteSerializer(serializers.ModelSerializer):
+    product = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.filter(orders__isnull=True),
+        validators=[
+            validators.UniqueValidator(
+                queryset=Order.objects.all(),
+                message='Этот товар отсутствует на складе.'
+            )
+        ])
+
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
+    class Meta:
+        model = Order
+        fields = '__all__'
+        extra_kwargs = {'id': {'read_only': True}}
