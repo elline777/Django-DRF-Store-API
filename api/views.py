@@ -12,6 +12,9 @@ from api.serializers import UserSerializer, StoreSerializer, ProductSerializer, 
 
 # Create your views here.
 class UserModelViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
     queryset = ApiUser.objects.all()
     http_method_names = ['post', 'get']
     serializer_class = UserSerializer
@@ -21,6 +24,9 @@ class UserModelViewSet(viewsets.ModelViewSet):
 
 
 class StoreModelViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows stores to be viewed or edited.
+    """
     permission_classes = [IsAuthenticatedOrReadOnly, IsSeller]
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
@@ -35,12 +41,18 @@ class StoreModelViewSet(viewsets.ModelViewSet):
 
 
 class ProductModelViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows products to be viewed or edited.
+    """
     permission_classes = [IsAuthenticatedOrReadOnly, IsSeller]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
 class OrderModelViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows orders to be viewed or edited.
+    """
     permission_classes = [IsAuthenticatedOrReadOnly, IsCustomer]
     queryset = Order.objects.all()
 

@@ -13,6 +13,7 @@ class ApiUser(AbstractUser):
 
 
 class Store(models.Model):
+
     name = models.CharField(max_length=128)
     address = models.TextField()
 

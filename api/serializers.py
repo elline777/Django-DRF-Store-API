@@ -63,7 +63,7 @@ class OrderWriteSerializer(serializers.ModelSerializer):
         validators=[
             validators.UniqueValidator(
                 queryset=Order.objects.all(),
-                message='Этот товар отсутствует на складе.'
+                message='This product is sold.'
             )
         ])
 
