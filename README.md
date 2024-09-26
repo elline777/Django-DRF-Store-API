@@ -34,7 +34,11 @@ API товарного склада.
     python manage.py makemigrations 
     python manage.py migrate
 ```
-5) Запускаем сервер
+5) Создаем суперпользователя
+```
+    python manage.py createsuperuser
+```
+6) Запускаем сервер
 ```
     python manage.py runserver
 ```
